@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Learning Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Навигация -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-language"></i>
+                <h1>English Challenges</h1>
+            </div>
+            <div class="nav-stats">
+                <span class="stat"><i class="fas fa-user-graduate"></i> Student</span>
+                <span class="stat"><i class="fas fa-fire"></i> Day 1</span>
+            </div>
+        </nav>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <!-- Приветствие -->
+            <section class="hero">
+                <h2><i class="fas fa-rocket"></i> Start Your 30-Day Challenge</h2>
+                <p class="hero-text">Choose a course and transform your English in 30 days</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="overall-progress" style="width: 10%"></div>
+                </div>
+                <div class="progress-text">10% Complete</div>
+            </section>
+
+            <!-- Список курсов -->
+            <section class="courses-section">
+                <h3><i class="fas fa-book-open"></i> Available Courses</h3>
+                <div class="courses-grid" id="courses-grid">
+                    <!-- Курсы загружаются через JavaScript -->
+                </div>
+            </section>
+
+            <!-- Статистика -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <h4>0</h4>
+                        <p>Days Completed</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-star"></i>
+                        <h4>0</h4>
+                        <p>Exercises Done</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>0h 0m</h4>
+                        <p>Time Spent</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-trophy"></i>
+                        <h4>0</h4>
+                        <p>Achievements</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Футер -->
+        <footer class="footer">
+            <p>© 2024 English Learning Platform • 30-Day Challenge System</p>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Модальное окно курса -->
+    <div id="course-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Course Title</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="course-details">
+                    <!-- Детали курса загружаются через JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
