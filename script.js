@@ -1,83 +1,103 @@
-// Данные курсов (в реальном проекте можно загружать из JSON файла)
-const coursesData = [
+// Данные курсов
+const courses = [
     {
         id: 1,
-        title: "30-Day Phrasal Verbs Challenge",
-        description: "Master essential phrasal verbs with daily practice",
-        icon: "fas fa-comment-dots",
-        days: 30,
-        color: "#667eea",
-        progress: 10
+        title: "30-Day Advanced Phrasal Verbs Challenge",
+        subtitle: "Master Advanced Phrasal Verbs",
+        progress: 3,
+        icon: "fas fa-bolt",
+        color: "linear-gradient(135deg, #667eea, #764ba2)",
+        description: "Master 150+ advanced phrasal verbs used in business, academic, and everyday contexts.",
+        link: "course1.html",
+        status: "In Progress"
     },
     {
         id: 2,
-        title: "Using 'Get' Challenge",
-        description: "Learn all uses of the versatile verb 'get'",
-        icon: "fas fa-bolt",
-        days: 30,
-        color: "#f093fb",
-        progress: 0
+        title: "30-Day Challenge Using 'Get'",
+        subtitle: "Master All Uses of 'Get'",
+        progress: 0,
+        icon: "fas fa-chart-line",
+        color: "linear-gradient(135deg, #f093fb, #f5576c)",
+        description: "Complete guide to mastering the versatile verb 'get' in all its forms.",
+        link: "#",
+        status: "Not Started"
     },
+    // Место для будущих курсов (3-12)
     {
         id: 3,
-        title: "Articles Challenge",
-        description: "Perfect your use of a/an/the and zero article",
-        icon: "fas fa-file-alt",
-        days: 30,
-        color: "#4facfe",
-        progress: 0
+        title: "Business English Challenge",
+        subtitle: "Professional Communication",
+        progress: 0,
+        icon: "fas fa-briefcase",
+        color: "linear-gradient(135deg, #4facfe, #00f2fe)",
+        description: "Learn essential business vocabulary and communication skills.",
+        link: "#",
+        status: "Coming Soon"
     },
     {
         id: 4,
-        title: "Business English",
-        description: "Essential vocabulary for the workplace",
-        icon: "fas fa-briefcase",
-        days: 30,
-        color: "#43e97b",
-        progress: 0
+        title: "Academic Writing Challenge",
+        subtitle: "University-Level Writing",
+        progress: 0,
+        icon: "fas fa-graduation-cap",
+        color: "linear-gradient(135deg, #43e97b, #38f9d7)",
+        description: "Improve your academic writing for essays and research papers.",
+        link: "#",
+        status: "Coming Soon"
     },
     {
         id: 5,
-        title: "Conversation Skills",
-        description: "Improve your speaking and listening",
-        icon: "fas fa-users",
-        days: 30,
-        color: "#fa709a",
-        progress: 0
+        title: "Pronunciation Mastery",
+        subtitle: "Sound Like a Native",
+        progress: 0,
+        icon: "fas fa-microphone-alt",
+        color: "linear-gradient(135deg, #fa709a, #fee140)",
+        description: "Perfect your pronunciation with daily practice exercises.",
+        link: "#",
+        status: "Coming Soon"
     },
     {
         id: 6,
-        title: "Grammar Intensive",
-        description: "Deep dive into English grammar",
-        icon: "fas fa-university",
-        days: 30,
-        color: "#ff9a9e",
-        progress: 0
+        title: "IELTS Preparation",
+        subtitle: "Score Band 7+",
+        progress: 0,
+        icon: "fas fa-award",
+        color: "linear-gradient(135deg, #30cfd0, #330867)",
+        description: "Comprehensive preparation for all IELTS test sections.",
+        link: "#",
+        status: "Coming Soon"
     }
 ];
 
-// DOM элементы
-const coursesGrid = document.getElementById('courses-grid');
-const courseModal = document.getElementById('course-modal');
-const modalTitle = document.getElementById('modal-title');
-const courseDetails = document.getElementById('course-details');
-const closeBtn = document.querySelector('.close-btn');
-const overallProgress = document.getElementById('overall-progress');
-
-// Инициализация
+// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
-    renderCourses();
-    setupEventListeners();
-    updateStats();
+    const currentPage = window.location.pathname;
+    
+    if (currentPage.includes('index.html') || currentPage === '/') {
+        initializeHomePage();
+    } else if (currentPage.includes('course1.html')) {
+        initializeCoursePage();
+    }
+    
+    initializeModal();
 });
 
-// Рендеринг карточек курсов
+// Инициализация главной страницы
+function initializeHomePage() {
+    renderCourses();
+    updateOverallProgress();
+}
+
+// Отображение курсов
 function renderCourses() {
+    const coursesGrid = document.getElementById('courses-grid');
+    if (!coursesGrid) return;
+    
     coursesGrid.innerHTML = '';
     
-    coursesData.forEach(course => {
-        const card = createCourseCard(course);
-        coursesGrid.appendChild(card);
+    courses.forEach(course => {
+        const courseCard = createCourseCard(course);
+        coursesGrid.appendChild(courseCard);
     });
 }
 
@@ -87,231 +107,160 @@ function createCourseCard(course) {
     card.className = 'course-card';
     card.dataset.id = course.id;
     
-    // Индикатор прогресса
-    const progressBar = course.progress > 0 ? 
-        `<div class="progress-container" style="margin: 15px 0; height: 6px;">
-            <div class="progress-bar" style="width: ${course.progress}%; background: ${course.color};"></div>
-        </div>
-        <div style="text-align: center; font-size: 0.9rem; color: #666;">
-            ${course.progress}% Complete
-        </div>` : '';
-    
     card.innerHTML = `
-        <div class="course-icon" style="color: ${course.color};">
-            <i class="${course.icon}"></i>
+        <div class="course-header">
+            <div class="course-icon" style="background: ${course.color}">
+                <i class="${course.icon}"></i>
+            </div>
+            <div>
+                <h3 class="course-title">${course.title}</h3>
+                <p class="course-subtitle">${course.subtitle}</p>
+            </div>
         </div>
-        <h4>${course.title}</h4>
-        <p class="course-description">${course.description}</p>
-        ${progressBar}
-        <div class="course-meta">
-            <span class="course-days">
-                <i class="fas fa-calendar-day"></i> ${course.days} days
-            </span>
-            <button class="start-btn" style="background: ${course.color};">
-                ${course.progress > 0 ? 'Continue' : 'Start'} Course
-            </button>
+        <p>${course.description}</p>
+        <div class="course-status">
+            <div class="status-text">Status: ${course.status}</div>
+            <div class="course-progress">
+                <div class="small-progress-container">
+                    <div class="small-progress-bar" style="width: ${course.progress}%"></div>
+                </div>
+                <div>${course.progress}% Complete</div>
+            </div>
         </div>
+        <button class="start-btn" data-id="${course.id}">
+            <i class="fas ${course.id === 1 ? 'fa-play' : 'fa-lock'}"></i>
+            ${course.id === 1 ? 'Continue' : 'Start Course'}
+        </button>
     `;
     
-    // Обработчики событий
+    // Добавляем обработчик клика
     const startBtn = card.querySelector('.start-btn');
-    startBtn.addEventListener('click', (e) => {
+    startBtn.addEventListener('click', function(e) {
         e.stopPropagation();
-        openCourseModal(course.id);
+        if (course.id === 1) {
+            window.location.href = course.link;
+        } else {
+            showCourseDetails(course);
+        }
     });
     
-    card.addEventListener('click', () => {
-        openCourseModal(course.id);
+    card.addEventListener('click', function() {
+        showCourseDetails(course);
     });
     
     return card;
 }
 
-// Открытие модального окна курса
-function openCourseModal(courseId) {
-    const course = coursesData.find(c => c.id === courseId);
-    if (!course) return;
+// Показ деталей курса в модальном окне
+function showCourseDetails(course) {
+    const modal = document.getElementById('course-modal');
+    const title = document.getElementById('modal-title');
+    const details = document.getElementById('course-details');
     
-    modalTitle.textContent = course.title;
+    title.textContent = course.title;
     
-    // Создание деталей курса
-    courseDetails.innerHTML = `
-        <div style="text-align: center; margin-bottom: 30px;">
-            <div style="font-size: 4rem; color: ${course.color}; margin-bottom: 20px;">
-                <i class="${course.icon}"></i>
+    let buttonHTML = '';
+    if (course.id === 1) {
+        buttonHTML = `<a href="${course.link}" class="start-btn"><i class="fas fa-play"></i> Continue Course</a>`;
+    } else if (course.status === 'Coming Soon') {
+        buttonHTML = '<button class="start-btn disabled"><i class="fas fa-clock"></i> Coming Soon</button>';
+    } else {
+        buttonHTML = '<button class="start-btn disabled"><i class="fas fa-lock"></i> Course Locked</button>';
+    }
+    
+    details.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+            <div class="course-icon" style="background: ${course.color}; width: 60px; height: 60px;">
+                <i class="${course.icon}" style="font-size: 1.8rem;"></i>
             </div>
-            <p style="font-size: 1.1rem; color: #666; margin-bottom: 30px;">
-                ${course.description}
-            </p>
-        </div>
-        
-        <div style="background: #f8f9fa; padding: 25px; border-radius: 15px; margin-bottom: 25px;">
-            <h3 style="margin-bottom: 15px; color: #333;">
-                <i class="fas fa-info-circle"></i> Course Details
-            </h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; font-weight: bold; color: ${course.color};">${course.days}</div>
-                    <div style="color: #666;">Total Days</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; font-weight: bold; color: ${course.color};">${course.progress}%</div>
-                    <div style="color: #666;">Your Progress</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; font-weight: bold; color: ${course.color};">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div style="color: #666;">Daily Exercises</div>
-                </div>
+            <div>
+                <h3 style="margin: 0 0 5px 0;">${course.subtitle}</h3>
+                <p style="color: #666;">${course.status}</p>
             </div>
         </div>
-        
-        <div style="margin-bottom: 30px;">
-            <h3 style="margin-bottom: 15px; color: #333;">
-                <i class="fas fa-play-circle"></i> How It Works
-            </h3>
-            <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
-                    <i class="fas fa-check" style="color: #43e97b; position: absolute; left: 0;"></i>
-                    1 lesson per day for 30 days
-                </li>
-                <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
-                    <i class="fas fa-check" style="color: #43e97b; position: absolute; left: 0;"></i>
-                    Video explanations for each topic
-                </li>
-                <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
-                    <i class="fas fa-check" style="color: #43e97b; position: absolute; left: 0;"></i>
-                    Interactive exercises with instant feedback
-                </li>
-                <li style="padding-left: 25px; position: relative;">
-                    <i class="fas fa-check" style="color: #43e97b; position: absolute; left: 0;"></i>
-                    Progress tracking and certificates
-                </li>
-            </ul>
+        <p style="margin-bottom: 20px;">${course.description}</p>
+        <div class="progress-container">
+            <div class="progress-bar" style="width: ${course.progress}%"></div>
         </div>
-        
-        <div style="text-align: center; margin-top: 30px;">
-            <button class="start-btn" id="start-course-btn" 
-                    style="padding: 15px 40px; font-size: 1.1rem; background: ${course.color};">
-                <i class="fas fa-play"></i> Start Day 1
-            </button>
-            ${course.progress > 0 ? `
-                <button class="start-btn" id="continue-course-btn" 
-                        style="padding: 15px 40px; font-size: 1.1rem; background: #6c757d; margin-left: 15px;">
-                    <i class="fas fa-forward"></i> Continue (Day ${Math.ceil(course.progress/100 * 30)})
-                </button>
-            ` : ''}
-        </div>
+        <div class="progress-text" style="text-align: center; margin: 10px 0 20px 0;">${course.progress}% Complete</div>
+        ${buttonHTML}
     `;
     
-    // Обработчики для кнопок в модальном окне
-    const startBtn = document.getElementById('start-course-btn');
-    if (startBtn) {
-        startBtn.addEventListener('click', () => {
-            alert(`Starting ${course.title}! Day 1 loading...`);
-            // Здесь будет переход к первому дню курса
-            courseModal.style.display = 'none';
-        });
-    }
-    
-    const continueBtn = document.getElementById('continue-course-btn');
-    if (continueBtn) {
-        continueBtn.addEventListener('click', () => {
-            const currentDay = Math.ceil(course.progress/100 * 30);
-            alert(`Continuing ${course.title} at Day ${currentDay}`);
-            // Здесь будет переход к текущему дню
-            courseModal.style.display = 'none';
-        });
-    }
-    
-    courseModal.style.display = 'flex';
+    modal.style.display = 'flex';
 }
 
-// Обновление статистики
-function updateStats() {
-    // Общий прогресс
-    const totalProgress = coursesData.reduce((sum, course) => sum + course.progress, 0);
-    const avgProgress = Math.round(totalProgress / coursesData.length);
-    overallProgress.style.width = `${avgProgress}%`;
+// Обновление общего прогресса
+function updateOverallProgress() {
+    const totalProgress = courses.reduce((sum, course) => sum + course.progress, 0) / courses.length;
+    const progressBar = document.getElementById('overall-progress');
+    const progressText = document.getElementById('overall-progress-text');
     
-    // Обновление текста прогресса
-    const progressText = document.querySelector('.progress-text');
+    if (progressBar) {
+        progressBar.style.width = `${totalProgress}%`;
+    }
+    
     if (progressText) {
-        progressText.textContent = `${avgProgress}% Complete`;
+        progressText.textContent = `${Math.round(totalProgress)}% Complete`;
+    }
+}
+
+// Инициализация модального окна
+function initializeModal() {
+    const modal = document.getElementById('course-modal');
+    const closeBtn = document.querySelector('.close-btn');
+    
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
     }
     
-    // Обновление статистики
-    const totalDays = coursesData.reduce((sum, course) => sum + Math.floor(course.days * course.progress/100), 0);
-    const statCards = document.querySelectorAll('.stat-card h4');
-    
-    if (statCards[0]) statCards[0].textContent = totalDays; // Days Completed
-    if (statCards[1]) statCards[1].textContent = totalDays * 3; // Exercises Done (примерно 3 упражнения в день)
-    
-    // Время потрачено (примерно 30 минут в день)
-    const totalMinutes = totalDays * 30;
-    const hours = Math.floor(totalMinutes / 60);
-    const minutes = totalMinutes % 60;
-    if (statCards[2]) statCards[2].textContent = `${hours}h ${minutes}m`;
-    
-    // Достижения
-    const achievements = Math.floor(totalDays / 7); // 1 достижение за каждую неделю
-    if (statCards[3]) statCards[3].textContent = achievements;
-}
-
-// Настройка обработчиков событий
-function setupEventListeners() {
-    // Закрытие модального окна
-    closeBtn.addEventListener('click', () => {
-        courseModal.style.display = 'none';
-    });
-    
-    // Закрытие модального окна по клику вне его
-    window.addEventListener('click', (e) => {
-        if (e.target === courseModal) {
-            courseModal.style.display = 'none';
-        }
-    });
-    
-    // Закрытие модального окна по ESC
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && courseModal.style.display === 'flex') {
-            courseModal.style.display = 'none';
-        }
-    });
-    
-    // Демо: обновление прогресса по клику на карточку
-    coursesGrid.addEventListener('click', (e) => {
-        const card = e.target.closest('.course-card');
-        if (card && e.target.tagName !== 'BUTTON') {
-            const courseId = parseInt(card.dataset.id);
-            const courseIndex = coursesData.findIndex(c => c.id === courseId);
-            
-            // Демо: увеличение прогресса при клике
-            if (coursesData[courseIndex].progress < 100) {
-                coursesData[courseIndex].progress += 10;
-                if (coursesData[courseIndex].progress > 100) {
-                    coursesData[courseIndex].progress = 100;
-                }
-                renderCourses();
-                updateStats();
-            }
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
         }
     });
 }
 
-// Функции для будущей интеграции с курсами
-function loadCourse(courseId) {
-    console.log(`Loading course ${courseId}`);
-    // Здесь будет загрузка данных курса из отдельного файла
+// Инициализация страницы курса
+function initializeCoursePage() {
+    // Обновляем прогресс-круг
+    const progressCircle = document.querySelector('.progress-circle');
+    if (progressCircle) {
+        const percent = progressCircle.dataset.percent;
+        const fill = progressCircle.querySelector('.fill');
+        const degree = (percent / 100) * 360;
+        fill.style.transform = `rotate(${degree}deg)`;
+    }
+    
+    // Добавляем обработчики для кнопок уроков
+    const lessonButtons = document.querySelectorAll('.lesson-card:not(.locked) .start-btn');
+    lessonButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const lessonType = this.querySelector('i').className.includes('video') ? 'Video' : 
+                             this.querySelector('i').className.includes('edit') ? 'Exercise' : 'Speaking';
+            alert(`Starting ${lessonType} Practice...\n(This is a demo - in a real app, this would launch the lesson)`);
+        });
+    });
 }
 
-function saveProgress(courseId, day, score) {
-    localStorage.setItem(`course_${courseId}_day_${day}`, score);
-    updateStats();
+// Анимация прогресс-баров
+function animateProgressBars() {
+    const progressBars = document.querySelectorAll('.progress-bar, .small-progress-bar');
+    progressBars.forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0';
+        setTimeout(() => {
+            bar.style.width = width;
+        }, 100);
+    });
 }
 
-// Экспорт для использования в других файлах
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { coursesData, updateStats, loadCourse, saveProgress };
+// Запуск анимации при загрузке
+setTimeout(animateProgressBars, 500);
+
+// Для будущих курсов
+function addFutureCourses() {
+    // Эта функция будет добавлять курсы 7-12 когда они будут готовы
+    console.log('Ready to add courses 7-12 when available');
 }
