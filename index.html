@@ -3,95 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>30-Day Language Challenge</title>
+    <title>30-DAY LANGUAGE CHALLENGE</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <!-- Навигация -->
-        <nav class="navbar">
-            <div class="nav-brand">
-                <i class="fas fa-language"></i>
-                <h1>30-Day Language Challenge</h1>
-            </div>
-            <div class="nav-stats">
-                <span class="stat"><i class="fas fa-user-graduate"></i> Student</span>
-                <span class="stat"><i class="fas fa-fire"></i> Day 1</span>
-            </div>
-        </nav>
+        <!-- Шапка с заголовком -->
+        <header class="main-header">
+            <h1>30-DAY LANGUAGE CHALLENGE</h1>
+        </header>
 
-        <!-- Основной контент -->
         <main class="main-content">
-            <!-- Приветствие -->
-            <section class="hero">
-                <h2><i class="fas fa-rocket"></i> Start Your 30-Day Challenge</h2>
-                <p class="hero-text">Choose a course and transform your English in 30 days</p>
-                <div class="progress-container">
-                    <div class="progress-bar" id="overall-progress"></div>
+            <!-- Первый курс - активный -->
+            <section class="course-card active-course">
+                <div class="course-header">
+                    <div class="course-main-title">
+                        <h2>Master Advanced Phrasal Verbs</h2>
+                        <p class="course-full-title">30-Day Advanced Phrasal Verbs Challenge</p>
+                    </div>
+                    <div class="course-progress-section">
+                        <div class="progress-circle">
+                            <div class="circle-fill" style="transform: rotate(108deg)"></div>
+                            <div class="circle-bg"></div>
+                            <div class="progress-percent">3%</div>
+                        </div>
+                        <div class="progress-label">COMPLETE</div>
+                    </div>
                 </div>
-                <div class="progress-text" id="overall-progress-text">3% Complete</div>
+                <a href="course1.html" class="course-btn continue-btn">
+                    <i class="fas fa-play"></i> Continue
+                </a>
             </section>
 
-            <!-- Список курсов -->
-            <section class="courses-section">
-                <h3><i class="fas fa-book-open"></i> Available Courses</h3>
-                <div class="courses-grid" id="courses-grid">
-                    <!-- Курсы загружаются через JavaScript -->
+            <!-- Второй курс - не начат -->
+            <section class="course-card">
+                <div class="course-header">
+                    <div class="course-main-title">
+                        <h2>30-Day Challenge Using 'Get'</h2>
+                        <p class="course-full-title">Master All Uses of the Verb 'Get'</p>
+                    </div>
+                    <div class="course-progress-section">
+                        <div class="progress-circle">
+                            <div class="circle-fill" style="transform: rotate(0deg)"></div>
+                            <div class="circle-bg"></div>
+                            <div class="progress-percent">0%</div>
+                        </div>
+                        <div class="progress-label">COMPLETE</div>
+                    </div>
                 </div>
+                <button class="course-btn start-btn">
+                    <i class="fas fa-play"></i> Start Course
+                </button>
             </section>
 
-            <!-- Статистика -->
-            <section class="stats-section">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <i class="fas fa-calendar-check"></i>
-                        <h4>1</h4>
-                        <p>Days Completed</p>
+            <!-- Третий курс - Business English -->
+            <section class="course-card">
+                <div class="course-header">
+                    <div class="course-main-title">
+                        <h2>Business English Mastery</h2>
+                        <p class="course-full-title">30-Day Business English Challenge</p>
                     </div>
-                    <div class="stat-card">
-                        <i class="fas fa-star"></i>
-                        <h4>0</h4>
-                        <p>Exercises Done</p>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-clock"></i>
-                        <h4>0h 0m</h4>
-                        <p>Time Spent</p>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-trophy"></i>
-                        <h4>0</h4>
-                        <p>Achievements</p>
+                    <div class="course-progress-section">
+                        <div class="progress-circle">
+                            <div class="circle-fill" style="transform: rotate(0deg)"></div>
+                            <div class="circle-bg"></div>
+                            <div class="progress-percent">0%</div>
+                        </div>
+                        <div class="progress-label">COMPLETE</div>
                     </div>
                 </div>
+                <button class="course-btn start-btn">
+                    <i class="fas fa-play"></i> Start Course
+                </button>
+            </section>
+
+            <!-- Четвертый курс - Conversation Skills -->
+            <section class="course-card">
+                <div class="course-header">
+                    <div class="course-main-title">
+                        <h2>Conversation Skills</h2>
+                        <p class="course-full-title">30-Day Speaking Challenge</p>
+                    </div>
+                    <div class="course-progress-section">
+                        <div class="progress-circle">
+                            <div class="circle-fill" style="transform: rotate(0deg)"></div>
+                            <div class="circle-bg"></div>
+                            <div class="progress-percent">0%</div>
+                        </div>
+                        <div class="progress-label">COMPLETE</div>
+                    </div>
+                </div>
+                <button class="course-btn start-btn">
+                    <i class="fas fa-play"></i> Start Course
+                </button>
+            </section>
+
+            <!-- Пятый курс - Grammar Intensive -->
+            <section class="course-card">
+                <div class="course-header">
+                    <div class="course-main-title">
+                        <h2>Grammar Intensive</h2>
+                        <p class="course-full-title">30-Day Grammar Challenge</p>
+                    </div>
+                    <div class="course-progress-section">
+                        <div class="progress-circle">
+                            <div class="circle-fill" style="transform: rotate(0deg)"></div>
+                            <div class="circle-bg"></div>
+                            <div class="progress-percent">0%</div>
+                        </div>
+                        <div class="progress-label">COMPLETE</div>
+                    </div>
+                </div>
+                <button class="course-btn start-btn">
+                    <i class="fas fa-play"></i> Start Course
+                </button>
+            </section>
+
+            <!-- Шестой курс - Vocabulary Builder -->
+            <section class="course-card">
+                <div class="course-header">
+                    <div class="course-main-title">
+                        <h2>Vocabulary Builder</h2>
+                        <p class="course-full-title">30-Day Vocabulary Challenge</p>
+                    </div>
+                    <div class="course-progress-section">
+                        <div class="progress-circle">
+                            <div class="circle-fill" style="transform: rotate(0deg)"></div>
+                            <div class="circle-bg"></div>
+                            <div class="progress-percent">0%</div>
+                        </div>
+                        <div class="progress-label">COMPLETE</div>
+                    </div>
+                </div>
+                <button class="course-btn start-btn">
+                    <i class="fas fa-play"></i> Start Course
+                </button>
             </section>
         </main>
 
         <!-- Футер -->
-        <footer class="footer">
-            <p>© 2024 English Learning Platform • 30-Day Challenge System</p>
-            <div class="footer-links">
-                <a href="#"><i class="fas fa-question-circle"></i> Help</a>
-                <a href="#"><i class="fas fa-cog"></i> Settings</a>
-                <a href="#"><i class="fas fa-envelope"></i> Contact</a>
-            </div>
+        <footer class="main-footer">
+            <p>30-DAY LANGUAGE CHALLENGE SYSTEM • v1.0</p>
         </footer>
-    </div>
-
-    <!-- Модальное окно курса -->
-    <div id="course-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title">Course Title</h2>
-                <button class="close-btn">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="course-details">
-                    <!-- Детали курса загружаются через JS -->
-                </div>
-            </div>
-        </div>
     </div>
 
     <script src="script.js"></script>
